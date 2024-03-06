@@ -1,0 +1,5 @@
+build/
+main/Kconfig.projbuild
+sdkconfig.old
+.devcontainer/
+.vscode/
