@@ -7,7 +7,7 @@
 
 #include "distance_sensor_reader.h"
 
-#define DISTANCE_SENSOR_TRIGGER_GPIO GPIO_NUM_12
+#define DISTANCE_SENSOR_TRIGGER_GPIO GPIO_NUM_25
 #define DISTANCE_SENSOR_ECHO_GPIO GPIO_NUM_13
 
 static const char *TAG = "main";
@@ -20,8 +20,13 @@ void app_main(void)
     uint32_t distance = 0;
 
     while(1){
-        distance_sensor_reader_read(sensor_ptr, &distance);
-        ESP_LOGI(TAG, "Distance = %u\n", distance);
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        if(distance_sensor_reader_read(sensor_ptr, &distance) == 0){
+            ESP_LOGI(TAG, "Distance = %u cm", distance);
+        } else {
+            ESP_LOGE(TAG, "Failed to read sensor");
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(100));
+
     }
 }
