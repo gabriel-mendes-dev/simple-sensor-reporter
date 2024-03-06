@@ -26,7 +26,7 @@ void app_main(void)
             ESP_LOGE(TAG, "Failed to read sensor");
         }
 
-        vTaskDelay(pdMS_TO_TICKS(100));
+        vTaskDelay(pdMS_TO_TICKS(2000));
 
     }
 }
