@@ -1,0 +1,49 @@
+@startuml ssr-class-diagram
+
+!define datatype(x) class x << (D,#FF7700) DataType>>
+!define task(x) class x << (T,#FF0000) Task>>
+!define queue(x) class x << (Q,#00FFFF) Queue>>
+
+Class Host_pc_comm {
+    +int32_t host_pc_comm_init(Host_pc_comm **self)
+    +int32_t host_pc_comm_deinit(Host_pc_comm **self)
+    +int32_t host_pc_comm_send_sensor_data(double value) // encrypted data
+    -int32_t encrypt_message()
+    -int32_t decrypt_message()
+}
+
+Class Distance_sensor_reader {
+    +int32_t distance_sensor_reader_init(Sensor_reader **self)
+    +int32_t distance_sensor_reader_deinit(Sensor_reader **self)
+    +int32_t distance_sensor_reader_read(double *val)
+}
+
+Class Simple_sensor_reporter {
+    - TaskHandle_t sensor_sampler_task_handle
+    - TaskHandle_t host_pc_comm_task_handle
+    - QueueHandle_t queue_handle
+    - void sensor_sampler_task(void *arg)
+    - void host_pc_comm_task(void *arg)
+}
+
+Simple_sensor_reporter -right-* "1" Host_pc_comm
+Simple_sensor_reporter -left-* "1"  Distance_sensor_reader
+
+task(sensor_sampler_task) {
+
+}
+
+queue(sensor_data_queue) {
+
+}
+
+task(host_pc_comm_task) {
+
+}
+
+sensor_sampler_task --> sensor_data_queue : <<writes>>
+host_pc_comm_task --> sensor_data_queue : <<reads>>
+
+Simple_sensor_reporter -down-* "1" sensor_sampler_task
+Simple_sensor_reporter -down-* "1" host_pc_comm_task
+Simple_sensor_reporter -down-* "1" sensor_data_queue
