@@ -1,0 +1,22 @@
+@startuml ssr-hw-architecture-diagram
+
+[UART/TTL-USB converter]
+[5V supply]
+[Logic-level converter]
+[Sensor HC-SR04]
+
+package "Host-PC" {
+    [UART/TTL-USB converter] <--> [USB Port] : USB
+}
+
+package "Sensor Reporter" {
+    [UART-TTL] <--> [UART/TTL-USB converter] : TTL
+    [GPIOs] <--> [Logic-level converter] : 3V3 CMOS
+}
+
+[Logic-level converter] <--> [Sensor HC-SR04] : 5V CMOS
+[5V supply] --> [Sensor HC-SR04]
+[5V supply] --> [Logic-level converter]
+
+
+@enduml
