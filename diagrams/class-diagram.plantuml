@@ -1,8 +1,8 @@
 @startuml ssr-class-diagram
 
-!define datatype(x) class x << (D,#FF7700) DataType>>
-!define task(x) class x << (T,#FF0000) Task>>
-!define queue(x) class x << (Q,#00FFFF) Queue>>
+!define task(x) class x << (T,Red) Task>>
+!define queue(x) class x << (Q,Cyan) Queue>>
+!define main(x) class x << (M,Yellow) main>>
 
 Class Host_pc_comm {
     +int32_t host_pc_comm_init(Host_pc_comm **self)
@@ -18,7 +18,7 @@ Class Distance_sensor_reader {
     +int32_t distance_sensor_reader_read(double *val)
 }
 
-Class Simple_sensor_reporter {
+main(Simple_sensor_reporter){
     - TaskHandle_t sensor_sampler_task_handle
     - TaskHandle_t host_pc_comm_task_handle
     - QueueHandle_t queue_handle
