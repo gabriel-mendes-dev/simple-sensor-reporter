@@ -7,7 +7,7 @@ Although the project was created from ESP-IDF project structure, the program onl
 
 # Diagrams
 
-Hardware and software diagrams in the `diagrams` directory can be compiled with plantuml. The pdfs will be available as release files.
+Hardware and software diagrams in the `diagrams` directory can be compiled with plantuml. The images will be available as release files.
 
 # Encrypted communication
 To run this program, you must generate a 32-bytes AES key to be used in the communication between the microcontroller and the Host PC. For testing purposes, you can generate a random one [here](https://acte.ltd/utils/randomkeygen) - the "Encryption key 256". Copy the string and add it to a file named `aes.key` in the `main` directory. The building process will add this key to the read-only data section.
