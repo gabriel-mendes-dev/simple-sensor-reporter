@@ -21,8 +21,11 @@ void app_main(void)
 {
     distance_sensor_t *sensor_ptr;
     host_pc_comm_t *host_pc_comm_ptr;
+
     ESP_ERROR_CHECK(distance_sensor_reader_init(&sensor_ptr, DISTANCE_SENSOR_TRIGGER_GPIO, DISTANCE_SENSOR_ECHO_GPIO));
-    ESP_ERROR_CHECK(host_pc_comm_init(&host_pc_comm_ptr, HOST_PC_COMM_UART, HOST_PC_COMM_UART_TXD, HOST_PC_COMM_UART_RXD));
+
+    extern const uint8_t aes_key_start[] asm("_binary_aes_key_start");
+    ESP_ERROR_CHECK(host_pc_comm_init(&host_pc_comm_ptr, HOST_PC_COMM_UART, HOST_PC_COMM_UART_TXD, HOST_PC_COMM_UART_RXD, aes_key_start));
 
     uint32_t distance = 0;
 
