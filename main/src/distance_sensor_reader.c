@@ -100,7 +100,7 @@ int32_t distance_sensor_reader_read(distance_sensor_t *self, uint32_t *distance)
     ESP_LOGD(TAG, "%"PRIu64" us", end_time-start_time);
     portEXIT_CRITICAL(&port_critical_section_mutex);
 
-    *distance = (end_time - start_time) / 58;
+    *distance = (end_time - start_time) / TIME_ON_AIR_TO_DISTANCE_IN_CM_CONSTANT;
 
     return 0;
 }
