@@ -11,9 +11,10 @@ typedef struct host_pc_comm host_pc_comm_t;
  * @param[in] self reference to pointer that will point to created obj, or NULL if fail
  * @param[in] tx_gpio_pin gpio pin number to be used as tx
  * @param[in] rx_gpio_pin gpio pin number to be used as rx
+ * @param[in] aes_key aes key to be used in the communication (32 bytes)
  * @return -1 if initialization fails, 0 if succeeds
  */
-int32_t host_pc_comm_init(host_pc_comm_t **self, uart_port_t uart_port_num, gpio_num_t tx_gpio_pin, gpio_num_t rx_gpio_pin);
+int32_t host_pc_comm_init(host_pc_comm_t **self, uart_port_t uart_port_num, gpio_num_t tx_gpio_pin, gpio_num_t rx_gpio_pin, const uint8_t *aes_key);
 
 /*
  * @brief Deinit (delete) an object that communicates with a host pc
